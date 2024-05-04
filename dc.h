@@ -29,8 +29,8 @@ void pop_and_print(struct stack *s);
 int head_dup(struct stack *s);
 
 /* machine */
-void	init_machine(struct machine *m);
-void	destroy_machine(struct machine *m);
+void init_machine(struct machine *m);
+void destroy_machine(struct machine *m);
 
 /* registers */
 int pop_and_store_into_reg(struct machine *m, unsigned char reg);
