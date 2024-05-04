@@ -18,7 +18,7 @@ add_nums(struct stack *s)
 		return 0;
 	}
 
-	if (stack_push(s, val1 + val2) == -1)
+	if (stack_push(s, val2 + val1) == -1)
 		return -1;
 
 	return 0;
@@ -62,7 +62,7 @@ mul_nums(struct stack *s)
 		return 0;
 	}
 
-	if (stack_push(s, val1 * val2) == -1)
+	if (stack_push(s, val2 * val1) == -1)
 		return -1;
 
 	return 0;
