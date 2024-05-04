@@ -22,12 +22,6 @@ do_line(char *cmd, struct machine *m)
 		}
 
 		switch (*cmd) {
-			case 'p':
-				print_head(&(m->s));
-				break;
-			case 'P':
-				pop_and_print(&(m->s));
-				break;
 			case '+':
 				if (add_nums(&(m->s)) == -1)
 					return -1;
@@ -50,6 +44,12 @@ do_line(char *cmd, struct machine *m)
 			case 'd':
 				if (head_dup(&(m->s)) == -1)
 					return -1;
+				break;
+			case 'P':
+				pop_and_print(&(m->s));
+				break;
+			case 'p':
+				print_head(&(m->s));
 				break;
 			default:
 				break;
