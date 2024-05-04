@@ -8,16 +8,18 @@ do_line(char *cmd, struct machine *m)
 {
 	while (*cmd) {
 		int is_neg = (*cmd == '_');
+		int is_dot = (*cmd == '.');
 
 		if (is_neg)
 			*cmd = '-';
 
-		if (isdigit(*cmd) || is_neg) {
+		if (isdigit(*cmd) || is_neg || is_dot) {
 			char *cmdorig = cmd;
+
 			if (stack_push(&(m->s), strtod(cmd, &cmd)) == -1) {
 				return -1;
-			} else if (cmd == cmdorig) {
-				puts("expected digit or dot after _");
+			} else if (cmd == cmdorig && !is_dot) {
+				puts("expected digit after either _ or .");
 			}
 		}
 
