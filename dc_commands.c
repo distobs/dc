@@ -125,6 +125,15 @@ head_dup(struct stack *s)
 
 /* Registers */
 int
+copy_from_reg_and_push(struct machine *m, unsigned char reg)
+{
+	if (stack_push(&(m->s), m->r[reg].stk[m->r[reg].head]) == -1)
+		return -1;
+
+	return 0;
+}
+
+int
 pop_and_store_into_reg(struct machine *m, unsigned char reg)
 {
 	double val;

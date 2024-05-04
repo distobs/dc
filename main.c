@@ -49,12 +49,13 @@ do_line(char *cmd, struct machine *m)
 				if (head_dup(&(m->s)) == -1)
 					return -1;
 				break;
+			case 'l':
+				if (copy_from_reg_and_push(m, *(++cmd)) == -1)
+					return -1;
+				break;
 			case 's':
 				if (pop_and_store_into_reg(m, *(++cmd)) == -1)
 					return -1;
-				break;
-			case 't': /* test */
-				printf("%f\n", m->r['a'].stk[m->r['a'].head]);
 				break;
 			case 'P':
 				pop_and_print(&(m->s));

@@ -33,6 +33,7 @@ void init_machine(struct machine *m);
 void destroy_machine(struct machine *m);
 
 /* registers */
+int copy_from_reg_and_push(struct machine *m, unsigned char reg);
 int pop_and_store_into_reg(struct machine *m, unsigned char reg);
 
 #endif
