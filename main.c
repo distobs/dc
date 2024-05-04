@@ -14,12 +14,14 @@ do_line(char *cmd, struct machine *m)
 			*cmd = '-';
 
 		if (isdigit(*cmd) || is_neg || is_dot) {
-			char *cmdorig = cmd;
+			char	*cmdorig = cmd;
+			double	num = strtod(cmd, &cmd);
 
-			if (stack_push(&(m->s), strtod(cmd, &cmd)) == -1) {
+			if (cmd == cmdorig && !is_dot) {
+				puts("expected digit after _");
+				break;
+			} else if (stack_push(&(m->s), num) == -1) {
 				return -1;
-			} else if (cmd == cmdorig && !is_dot) {
-				puts("expected digit after either _ or .");
 			}
 		}
 
