@@ -21,6 +21,12 @@ stack_grow(struct stack *s)
 	return (s->stk == NULL) ? -1 : 0;
 }
 
+double
+stack_head(struct stack *s)
+{
+	return (s->stk[s->head]);
+}
+
 void
 stack_init(struct stack *s)
 {

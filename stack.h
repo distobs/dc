@@ -15,6 +15,7 @@ struct stack {
 void	stack_clean(struct stack *s);
 void	stack_destroy(struct stack *s);
 int	stack_grow(struct stack *s);
+double	stack_head(struct stack *s);
 void	stack_init(struct stack *s);
 int	stack_pop(struct stack *s, double *val);
 int	stack_push(struct stack *s, double val);
