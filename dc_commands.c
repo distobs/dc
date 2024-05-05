@@ -127,7 +127,8 @@ head_dup(struct stack *s)
 int
 copy_from_reg_and_push(struct machine *m, unsigned char reg)
 {
-	if (stack_push(&(m->s), m->r[reg].stk[m->r[reg].head]) == -1)
+	if (stack_push(&(m->main_stack),
+		       m->registers[reg].stk[m->registers[reg].head]) == -1)
 		return -1;
 
 	return 0;
@@ -138,12 +139,12 @@ pop_and_store_into_reg(struct machine *m, unsigned char reg)
 {
 	double val;
 
-	if (stack_pop(&(m->s), &val) == -1) {
+	if (stack_pop(&(m->main_stack), &val) == -1) {
 		puts("stack empty");
 		return 0;
 	}
 
-	if (stack_push(&(m->r[reg]), val) == -1)
+	if (stack_push(&(m->registers[reg]), val) == -1)
 		return -1;
 
 	return 0;

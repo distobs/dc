@@ -20,33 +20,33 @@ do_line(char *cmd, struct machine *m)
 			if (cmd == cmdorig && !is_dot) {
 				puts("expected digit after _");
 				break;
-			} else if (stack_push(&(m->s), num) == -1) {
+			} else if (stack_push(&(m->main_stack), num) == -1) {
 				return -1;
 			}
 		}
 
 		switch (*cmd) {
 			case '+':
-				if (add_nums(&(m->s)) == -1)
+				if (add_nums(&(m->main_stack)) == -1)
 					return -1;
 				break;
 			case '-':
-				if (sub_nums(&(m->s)) == -1)
+				if (sub_nums(&(m->main_stack)) == -1)
 					return -1;
 				break;
 			case '*':
-				if (mul_nums(&(m->s)) == -1)
+				if (mul_nums(&(m->main_stack)) == -1)
 					return -1;
 				break;
 			case '/':
-				if (div_nums(&(m->s)) == -1)
+				if (div_nums(&(m->main_stack)) == -1)
 					return -1;
 				break;
 			case 'c':
-				stack_clean(&(m->s));
+				stack_clean(&(m->main_stack));
 				break;
 			case 'd':
-				if (head_dup(&(m->s)) == -1)
+				if (head_dup(&(m->main_stack)) == -1)
 					return -1;
 				break;
 			case 'l':
@@ -58,10 +58,10 @@ do_line(char *cmd, struct machine *m)
 					return -1;
 				break;
 			case 'P':
-				pop_and_print(&(m->s));
+				pop_and_print(&(m->main_stack));
 				break;
 			case 'p':
-				print_head(&(m->s));
+				print_head(&(m->main_stack));
 				break;
 			default:
 				break;

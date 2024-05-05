@@ -6,8 +6,8 @@
 #define REGISTERS 256
 
 struct machine {
-	struct stack s;
-	struct stack r[REGISTERS];
+	struct stack main_stack;
+	struct stack registers[REGISTERS];
 };
 
 /* main */
