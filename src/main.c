@@ -49,6 +49,17 @@ do_line(char *cmd, struct machine *m)
 				if (head_dup(MACHINE_STACKP(m, SMAIN)) == -1)
 					return -1;
 				break;
+			case 'f': {
+				int i;
+
+				for (i = 0; i <= MACHINE_STACKP(m, SMAIN)->head;
+				     ++i) {
+					printf("%f\n",
+					       MACHINE_STACKP(m, SMAIN)->stk[i]
+					      );
+				}
+			}
+				break;
 			case 'l':
 				if (copy_from_reg_and_push(m, *(++cmd)) == -1)
 					return -1;
