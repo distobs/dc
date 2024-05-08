@@ -63,6 +63,9 @@ do_line(char *cmd, struct machine *m)
 			case 's':
 				rv = pop_and_store_into_reg(m, *(++cmd));
 				break;
+			case 'v':
+				rv = sqrt_num(MACHINE_STACKP(m, SMAIN));
+				break;
 			case 'P':
 				pop_and_print(MACHINE_STACKP(m, SMAIN));
 				break;

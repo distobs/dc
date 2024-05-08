@@ -136,6 +136,23 @@ exp_nums(struct stack *s)
 }
 
 int
+sqrt_num(struct stack *s)
+{
+	double val;
+
+	if (stack_pop(s, &val) == -1) {
+		puts("stack empty");
+		stack_push(s, val);
+		return 0;
+	}
+
+	if (stack_push(s, sqrt(val)) == -1)
+		return -1;
+
+	return 0;
+}
+
+int
 divmod_nums(struct stack *s)
 {
 	double val1, val2;
@@ -156,5 +173,6 @@ divmod_nums(struct stack *s)
 
 	if (stack_push(s, (int)val2 % (int)val1) == -1)
 		return -1;
+
 	return 0;
 }

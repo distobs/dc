@@ -21,8 +21,9 @@ int sub_nums(struct stack *s);
 int mul_nums(struct stack *s);
 int div_nums(struct stack *s);
 int mod_nums(struct stack *s);
-int divmod_nums(struct stack *s);
 int exp_nums(struct stack *s);
+int sqrt_num(struct stack *s);
+int divmod_nums(struct stack *s);
 
 /** printing **/
 void print_head(struct stack *s);
