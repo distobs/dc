@@ -5,8 +5,8 @@ function dc_stripdots_nl () {
 }
 
 function dc_operations () {
-	test_cmd="2.5 2.5 +p 10 5 -p 10 2 *p 50 25 /p 10 3 %p"
-	expected="5 5 20 2 1 "
+	test_cmd="2.5 2.5 +p 10 5 -p 10 2 *p 50 25 /p 10 3 %p c 10 2 ~ f"
+	expected="5 5 20 2 1 0 5 "
 	got=$(dc_stripdots_nl "$test_cmd")
 
 	#echo "expected $expected"
@@ -21,7 +21,7 @@ function dc_operations () {
 
 function dc_printing () {
 	test_cmd="10 p P p 10 20 40 f"
-	expected="10 10 stack empty 10 20 40 "
+	expected="10 10 stack empty 40 20 10 "
 	got=$(dc_stripdots_nl "$test_cmd")
 
 	#echo "expected $expected"

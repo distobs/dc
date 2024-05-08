@@ -22,7 +22,7 @@ print_stack(struct stack *s)
 		return;
 	}
 
-	for (i = 0; i <= s->head; ++i) {
+	for (i = s->head; i >= 0; --i) {
 		printf("%f\n", s->stk[i]);
 	}
 }
