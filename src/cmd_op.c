@@ -1,3 +1,4 @@
+#include <math.h>
 #include <stdio.h>
 #include "stack.h"
 
@@ -107,6 +108,28 @@ mod_nums(struct stack *s)
 
 	/* this shitty thing is temporary. */
 	if (stack_push(s, (int)val2 % (int)val1) == -1)
+		return -1;
+
+	return 0;
+}
+
+int
+exp_nums(struct stack *s)
+{
+	double val1, val2;
+
+	if (stack_pop(s, &val1) == -1) {
+		puts("stack empty");
+		return 0;
+	}
+
+	if (stack_pop(s, &val2) == -1) {
+		puts("stack empty");
+		stack_push(s, val1);
+		return 0;
+	}
+
+	if (stack_push(s, pow(val2, val1)) == -1)
 		return -1;
 
 	return 0;

@@ -42,6 +42,9 @@ do_line(char *cmd, struct machine *m)
 			case '%':
 				rv = mod_nums(MACHINE_STACKP(m, SMAIN));
 				break;
+			case '^':
+				rv = exp_nums(MACHINE_STACKP(m, SMAIN));
+				break;
 			case '~':
 				rv = divmod_nums(MACHINE_STACKP(m, SMAIN));
 				break;
