@@ -20,33 +20,33 @@ do_line(char *cmd, struct machine *m)
 			if (cmd == cmdorig && !is_dot) {
 				puts("expected digit after _");
 				break;
-			} else if (stack_push(&(m->main_stack), num) == -1) {
+			} else if (stack_push(MACHINE_STACKP(m, SMAIN), num) == -1) {
 				return -1;
 			}
 		}
 
 		switch (*cmd) {
 			case '+':
-				if (add_nums(&(m->main_stack)) == -1)
+				if (add_nums(MACHINE_STACKP(m, SMAIN)) == -1)
 					return -1;
 				break;
 			case '-':
-				if (sub_nums(&(m->main_stack)) == -1)
+				if (sub_nums(MACHINE_STACKP(m, SMAIN)) == -1)
 					return -1;
 				break;
 			case '*':
-				if (mul_nums(&(m->main_stack)) == -1)
+				if (mul_nums(MACHINE_STACKP(m, SMAIN)) == -1)
 					return -1;
 				break;
 			case '/':
-				if (div_nums(&(m->main_stack)) == -1)
+				if (div_nums(MACHINE_STACKP(m, SMAIN)) == -1)
 					return -1;
 				break;
 			case 'c':
-				stack_clean(&(m->main_stack));
+				stack_clean(MACHINE_STACKP(m, SMAIN));
 				break;
 			case 'd':
-				if (head_dup(&(m->main_stack)) == -1)
+				if (head_dup(MACHINE_STACKP(m, SMAIN)) == -1)
 					return -1;
 				break;
 			case 'l':
@@ -58,10 +58,10 @@ do_line(char *cmd, struct machine *m)
 					return -1;
 				break;
 			case 'P':
-				pop_and_print(&(m->main_stack));
+				pop_and_print(MACHINE_STACKP(m, SMAIN));
 				break;
 			case 'p':
-				print_head(&(m->main_stack));
+				print_head(MACHINE_STACKP(m, SMAIN));
 				break;
 			default:
 				break;
@@ -84,16 +84,16 @@ main(void)
 	while (1) {
 		if (fgets(buf, 1024, stdin) == NULL) {
 			if (ferror(stdin)) {
-				destroy_machine(&(m));
+				destroy_machine(&m);
 				exit(1);
 			} else if (feof(stdin)) {
-				destroy_machine(&(m));
+				destroy_machine(&m);
 				exit(0);
 			}
 		}
 
 		if (do_line(buf, &m) == -1) {
-			destroy_machine(&(m));
+			destroy_machine(&m);
 			exit(1);
 		}
 	}

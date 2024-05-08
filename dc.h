@@ -29,11 +29,19 @@ void pop_and_print(struct stack *s);
 int head_dup(struct stack *s);
 
 /* machine */
-void init_machine(struct machine *m);
-void destroy_machine(struct machine *m);
+#define SMAIN (-1)
+#define MACHINE_STACKP(m, reg)	((reg == SMAIN) ? (&(m->main_stack)) : \
+				 (&(m->registers[reg])))
+#define MACHINE_STACK_EMPTY(m, reg) (STACK_EMPTY(MACHINE_STACKP(m, reg)))
+
+void	init_machine(struct machine *m);
+double	machine_shead(struct machine *m, size_t reg);
+int	machine_spop(struct machine *m, double *val, size_t reg);
+int	machine_spush(struct machine *m, double val, size_t reg);
+void	destroy_machine(struct machine *m);
 
 /* registers */
-int copy_from_reg_and_push(struct machine *m, unsigned char reg);
-int pop_and_store_into_reg(struct machine *m, unsigned char reg);
+int copy_from_reg_and_push(struct machine *m, size_t reg);
+int pop_and_store_into_reg(struct machine *m, size_t reg);
 
 #endif
