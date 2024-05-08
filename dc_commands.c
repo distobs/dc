@@ -94,7 +94,7 @@ div_nums(struct stack *s)
 void
 print_head(struct stack *s)
 {
-	if (s->head == -1) {
+	if (STACK_EMPTY(s)) {
 		puts("stack empty");
 		return;
 	}
@@ -120,31 +120,36 @@ pop_and_print(struct stack *s)
 int
 head_dup(struct stack *s)
 {
-	return stack_push(s, s->stk[s->head]);
+	return stack_push(s, stack_head(s));
 }
 
 /* Registers */
 int
-copy_from_reg_and_push(struct machine *m, unsigned char reg)
+copy_from_reg_and_push(struct machine *m, size_t reg)
 {
-	if (stack_push(&(m->main_stack),
-		       m->registers[reg].stk[m->registers[reg].head]) == -1)
+	if (MACHINE_STACK_EMPTY(m, reg)) {
+		puts("register stack empty");
+		return 0;
+	}
+
+	if (machine_spush(m, machine_shead(m, reg), SMAIN)
+	    == -1)
 		return -1;
 
 	return 0;
 }
 
 int
-pop_and_store_into_reg(struct machine *m, unsigned char reg)
+pop_and_store_into_reg(struct machine *m, size_t reg)
 {
 	double val;
 
-	if (stack_pop(&(m->main_stack), &val) == -1) {
+	if (machine_spop(m, &val, SMAIN) == -1) {
 		puts("stack empty");
 		return 0;
 	}
 
-	if (stack_push(&(m->registers[reg]), val) == -1)
+	if (machine_spush(m, val, reg) == -1)
 		return -1;
 
 	return 0;

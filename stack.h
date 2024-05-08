@@ -12,6 +12,8 @@ struct stack {
 	size_t	 size;
 };
 
+#define STACK_EMPTY(s) (s->head == -1)
+
 void	stack_clean(struct stack *s);
 void	stack_destroy(struct stack *s);
 int	stack_grow(struct stack *s);

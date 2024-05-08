@@ -38,7 +38,7 @@ stack_init(struct stack *s)
 int
 stack_pop(struct stack *s, double *val)
 {
-	if (s->head == -1)
+	if (STACK_EMPTY(s))
 		return -1;
 
 	*val = s->stk[s->head--];
