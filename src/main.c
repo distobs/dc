@@ -6,6 +6,7 @@
 int
 do_line(char *cmd, struct machine *m)
 {
+	int rv = 0;
 	while (*cmd) {
 		int is_neg = (*cmd == '_');
 		int is_dot = (*cmd == '.');
@@ -27,46 +28,31 @@ do_line(char *cmd, struct machine *m)
 
 		switch (*cmd) {
 			case '+':
-				if (add_nums(MACHINE_STACKP(m, SMAIN)) == -1)
-					return -1;
+				rv = add_nums(MACHINE_STACKP(m, SMAIN));
 				break;
 			case '-':
-				if (sub_nums(MACHINE_STACKP(m, SMAIN)) == -1)
-					return -1;
+				rv = sub_nums(MACHINE_STACKP(m, SMAIN));
 				break;
 			case '*':
-				if (mul_nums(MACHINE_STACKP(m, SMAIN)) == -1)
-					return -1;
+				rv = mul_nums(MACHINE_STACKP(m, SMAIN));
 				break;
 			case '/':
-				if (div_nums(MACHINE_STACKP(m, SMAIN)) == -1)
-					return -1;
+				rv = div_nums(MACHINE_STACKP(m, SMAIN));
 				break;
 			case 'c':
 				stack_clean(MACHINE_STACKP(m, SMAIN));
 				break;
 			case 'd':
-				if (head_dup(MACHINE_STACKP(m, SMAIN)) == -1)
-					return -1;
+				rv = head_dup(MACHINE_STACKP(m, SMAIN));
 				break;
-			case 'f': {
-				int i;
-
-				for (i = 0; i <= MACHINE_STACKP(m, SMAIN)->head;
-				     ++i) {
-					printf("%f\n",
-					       MACHINE_STACKP(m, SMAIN)->stk[i]
-					      );
-				}
-			}
+			case 'f':
+				print_stack(MACHINE_STACKP(m, SMAIN));
 				break;
 			case 'l':
-				if (copy_from_reg_and_push(m, *(++cmd)) == -1)
-					return -1;
+				rv = copy_from_reg_and_push(m, *(++cmd));
 				break;
 			case 's':
-				if (pop_and_store_into_reg(m, *(++cmd)) == -1)
-					return -1;
+				rv = pop_and_store_into_reg(m, *(++cmd));
 				break;
 			case 'P':
 				pop_and_print(MACHINE_STACKP(m, SMAIN));
@@ -78,10 +64,13 @@ do_line(char *cmd, struct machine *m)
 				break;
 		}
 
-		++cmd;
+		if (rv == -1)
+			return -1;
+		else
+			++cmd;
 	}
 
-	return 0;
+	return rv;
 }
 
 int

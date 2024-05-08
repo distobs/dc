@@ -9,8 +9,7 @@ copy_from_reg_and_push(struct machine *m, size_t reg)
 		return 0;
 	}
 
-	if (machine_spush(m, machine_shead(m, reg), SMAIN)
-	    == -1)
+	if (machine_spush(m, machine_shead(m, reg), SMAIN) == -1)
 		return -1;
 
 	return 0;

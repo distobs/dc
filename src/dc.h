@@ -23,6 +23,7 @@ int div_nums(struct stack *s);
 
 /** printing **/
 void print_head(struct stack *s);
+void print_stack(struct stack *s);
 void pop_and_print(struct stack *s);
 
 /** stack manipulation **/
