@@ -1,4 +1,4 @@
-SRC = dc_commands.c machine.c main.c stack.c
+SRC = cmd_op.c cmd_print.c cmd_reg.c cmd_smanip.c machine.c main.c stack.c
 
 #CFLAGS = -o dc -pedantic -std=c89 -Wall
 CFLAGS = -o dc -pedantic -std=c89 -Wall -O0 -g

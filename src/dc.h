@@ -1,7 +1,7 @@
 #ifndef DC_H
 #define DC_H
 
-#include "stack.h" /* #include <sys/types.h> <stddef.h> */
+#include "stack.h"
 
 #define REGISTERS 256
 

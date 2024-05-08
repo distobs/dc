@@ -1,4 +1,4 @@
-#include "dc.h" /* #include "stack.h" */
+#include "dc.h"
 
 void
 init_machine(struct machine *m)
