@@ -12,7 +12,6 @@ struct machine {
 
 /* main */
 int	do_line(char *cmd, struct machine *m);
-void	init_machine(struct machine *m);
 
 /* dc_commands */
 /** operations **/
