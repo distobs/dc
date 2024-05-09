@@ -1,14 +1,8 @@
 #ifndef DC_H
 #define DC_H
 
+#include "machine.h"
 #include "stack.h"
-
-#define REGISTERS 256
-
-struct machine {
-	struct stack main_stack;
-	struct stack registers[REGISTERS];
-};
 
 /* main */
 int	do_line(char *cmd, struct machine *m);
@@ -33,18 +27,6 @@ void pop_and_print(struct stack *s);
 
 /** stack manipulation **/
 int head_dup(struct stack *s);
-
-/* machine */
-#define SMAIN (-1)
-#define MACHINE_STACKP(m, reg)	((reg == SMAIN) ? (&(m->main_stack)) : \
-				 (&(m->registers[reg])))
-#define MACHINE_STACK_EMPTY(m, reg) (STACK_EMPTY(MACHINE_STACKP(m, reg)))
-
-void	init_machine(struct machine *m);
-double	machine_shead(struct machine *m, size_t reg);
-int	machine_spop(struct machine *m, double *val, size_t reg);
-int	machine_spush(struct machine *m, double val, size_t reg);
-void	destroy_machine(struct machine *m);
 
 /* registers */
 int copy_from_reg_and_push(struct machine *m, size_t reg);

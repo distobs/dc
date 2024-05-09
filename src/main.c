@@ -21,44 +21,44 @@ do_line(char *cmd, struct machine *m)
 			if (cmd == cmdorig && !is_dot) {
 				puts("expected digit after _");
 				break;
-			} else if (stack_push(MACHINE_STACKP(m, SMAIN), num) == -1) {
+			} else if (stack_push(STACKP(m, SMAIN), num) == -1) {
 				return -1;
 			}
 		}
 
 		switch (*cmd) {
 			case '+':
-				rv = add_nums(MACHINE_STACKP(m, SMAIN));
+				rv = add_nums(STACKP(m, SMAIN));
 				break;
 			case '-':
-				rv = sub_nums(MACHINE_STACKP(m, SMAIN));
+				rv = sub_nums(STACKP(m, SMAIN));
 				break;
 			case '*':
-				rv = mul_nums(MACHINE_STACKP(m, SMAIN));
+				rv = mul_nums(STACKP(m, SMAIN));
 				break;
 			case '/':
-				rv = div_nums(MACHINE_STACKP(m, SMAIN));
+				rv = div_nums(STACKP(m, SMAIN));
 				break;
 			case '%':
-				rv = mod_nums(MACHINE_STACKP(m, SMAIN));
+				rv = mod_nums(STACKP(m, SMAIN));
 				break;
 			case '^':
-				rv = exp_nums(MACHINE_STACKP(m, SMAIN));
+				rv = exp_nums(STACKP(m, SMAIN));
 				break;
 			case '~':
-				rv = divmod_nums(MACHINE_STACKP(m, SMAIN));
+				rv = divmod_nums(STACKP(m, SMAIN));
 				break;
 			case '|':
-				rv = modexp_nums(MACHINE_STACKP(m, SMAIN));
+				rv = modexp_nums(STACKP(m, SMAIN));
 				break;
 			case 'c':
-				stack_clean(MACHINE_STACKP(m, SMAIN));
+				stack_clean(STACKP(m, SMAIN));
 				break;
 			case 'd':
-				rv = head_dup(MACHINE_STACKP(m, SMAIN));
+				rv = head_dup(STACKP(m, SMAIN));
 				break;
 			case 'f':
-				print_stack(MACHINE_STACKP(m, SMAIN));
+				print_stack(STACKP(m, SMAIN));
 				break;
 			case 'l':
 				rv = copy_from_reg_and_push(m, *(++cmd));
@@ -67,13 +67,13 @@ do_line(char *cmd, struct machine *m)
 				rv = pop_and_store_into_reg(m, *(++cmd));
 				break;
 			case 'v':
-				rv = sqrt_num(MACHINE_STACKP(m, SMAIN));
+				rv = sqrt_num(STACKP(m, SMAIN));
 				break;
 			case 'P':
-				pop_and_print(MACHINE_STACKP(m, SMAIN));
+				pop_and_print(STACKP(m, SMAIN));
 				break;
 			case 'p':
-				print_head(MACHINE_STACKP(m, SMAIN));
+				print_head(STACKP(m, SMAIN));
 				break;
 			default:
 				break;
