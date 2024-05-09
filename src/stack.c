@@ -1,5 +1,5 @@
 #include <stdlib.h>
-#include "stack.h" /* #include <sys/types.h> <stddef.h> */
+#include "stack.h"
 
 void
 stack_destroy(struct stack *s)
