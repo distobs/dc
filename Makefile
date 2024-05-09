@@ -4,7 +4,7 @@ dc:
 	cd src && make
 
 test:
-	cd test && sh test_dc.sh
+	make && cd test && sh test_dc.sh
 
 clean:
 	rm ./src/dc

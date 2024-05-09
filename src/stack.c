@@ -14,23 +14,11 @@ stack_destroy(struct stack *s)
 }
 
 int
-stack_empty(struct stack *s, unsigned needed)
-{
-	return (s->head < needed - 1);
-}
-
-int
 stack_grow(struct stack *s)
 {
 	s->stk = realloc(s->stk, (s->size += GROW_BY) * sizeof(s->stk[0]));
 
 	return (s->stk == NULL) ? -1 : 0;
-}
-
-double
-stack_head(struct stack *s)
-{
-	return (s->stk[s->head]);
 }
 
 void

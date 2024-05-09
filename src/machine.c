@@ -13,7 +13,7 @@ init_machine(struct machine *m)
 double
 machine_shead(struct machine *m, size_t reg)
 {
-	return (stack_head(MACHINE_STACKP(m, reg)));
+	return (STACK_HEAD(MACHINE_STACKP(m, reg)));
 }
 
 int

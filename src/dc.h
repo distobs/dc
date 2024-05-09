@@ -38,6 +38,7 @@ int head_dup(struct stack *s);
 #define MACHINE_STACKP(m, reg)	((reg == SMAIN) ? (&(m->main_stack)) : \
 				 (&(m->registers[reg])))
 #define MACHINE_STACK_EMPTY(m, reg) (STACK_EMPTY(MACHINE_STACKP(m, reg)))
+#define STACK_ENOUGH(s, needed) ((s->head) >= (needed - 1))
 
 void	init_machine(struct machine *m);
 double	machine_shead(struct machine *m, size_t reg);
