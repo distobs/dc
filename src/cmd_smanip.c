@@ -1,6 +1,7 @@
 #include "dc.h"
 
-/* Stack manipulation */
+/* The 'd command.
+ * Duplicates the main stack's head. */
 int
 head_dup(struct stack *s)
 {

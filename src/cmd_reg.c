@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include "dc.h"
 
+/* The 'lR' command.
+ * Copies a value from the 'R' register's stack and pushes onto the main stack.
+ * Returns -1 on failed push. */
 int
 copy_from_reg_and_push(struct machine *m, size_t reg)
 {
@@ -15,6 +18,9 @@ copy_from_reg_and_push(struct machine *m, size_t reg)
 	return 0;
 }
 
+/* The 'sR' command.
+ * Pops a value from the main stack register and pushes onto the 'R' register's
+ * stack. Returns -1 on failed push. */
 int
 pop_and_store_into_reg(struct machine *m, size_t reg)
 {

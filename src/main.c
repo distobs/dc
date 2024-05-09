@@ -3,28 +3,39 @@
 #include <stdlib.h>
 #include "dc.h"
 
+/* Reads a number from the *cmd string if there's a digit. Pushes onto the main
+ * stack. Returns -1 on failed push. */
+static int
+get_num(char **cmd, struct machine *m)
+{
+	int is_neg = (**cmd == '_');
+	int is_dot = (**cmd == '.');
+
+	if (is_neg)
+		**cmd = '-';
+
+	if (isdigit(**cmd) || is_neg || is_dot) {
+		char	*cmdorig = *cmd;
+		double	num = strtod(*cmd, cmd);
+
+		if (*cmd == cmdorig && !is_dot) {
+			puts("expected digit after _");
+		} else if (stack_push(STACKP(m, SMAIN), num) == -1) {
+			return -1;
+		}
+	}
+
+	return 0;
+}
+
+/* Executes commands in cmd. Returns -1 on failed push. */
 static int
 do_line(char *cmd, struct machine *m)
 {
 	int rv = 0;
 	while (*cmd) {
-		int is_neg = (*cmd == '_');
-		int is_dot = (*cmd == '.');
-
-		if (is_neg)
-			*cmd = '-';
-
-		if (isdigit(*cmd) || is_neg || is_dot) {
-			char	*cmdorig = cmd;
-			double	num = strtod(cmd, &cmd);
-
-			if (cmd == cmdorig && !is_dot) {
-				puts("expected digit after _");
-				break;
-			} else if (stack_push(STACKP(m, SMAIN), num) == -1) {
-				return -1;
-			}
-		}
+		if (get_num(&cmd, m) == -1)
+			return -1;
 
 		switch (*cmd) {
 			case '+':

@@ -3,12 +3,13 @@
 
 #include <sys/types.h>
 
+/* How much space to realloc if the stack is full. */
 #define GROW_BY 50
 
 struct stack {
-	double	*stk;
-	ssize_t	 head;
-	size_t	 size;
+	double	*stk;	/* The stack. */
+	ssize_t	 head;	/* (stack empty) ? -1 : the stack's head */
+	size_t	 size;	/* The size allocated for the stack. */
 };
 
 #define STACK_CLEAN(s)	(s->head = -1)

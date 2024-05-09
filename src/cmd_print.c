@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "dc.h"
 
+/* The 'p' command.
+ * Prints the head of the main stack. */
 void
 print_head(struct stack *s)
 {
@@ -9,9 +11,11 @@ print_head(struct stack *s)
 		return;
 	}
 
-	printf("%f\n", s->stk[s->head]);
+	printf("%f\n", STACK_HEAD(s));
 }
 
+/* The 'f' command.
+ * Prints the whole main stack. */
 void
 print_stack(struct stack *s)
 {
@@ -27,6 +31,8 @@ print_stack(struct stack *s)
 	}
 }
 
+/* The 'P' comamnd.
+ * Pops a value from the main stack and prints it. */
 void
 pop_and_print(struct stack *s)
 {

@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include "dc.h"
 
+/* The '+' command.
+ * Pops two values and adds them both. Returns -1 on failed push. */
 int
 add_nums(struct stack *s)
 {
@@ -21,6 +23,9 @@ add_nums(struct stack *s)
 	return 0;
 }
 
+/* The '-' command.
+ * Pops two values and subtracts the first from the second. Returns -1 on
+ * failed push. */
 int
 sub_nums(struct stack *s)
 {
@@ -40,6 +45,8 @@ sub_nums(struct stack *s)
 	return 0;
 }
 
+/* The '*' command.
+ * Pops two values and multiplies them both. Returns -1 on failed push. */
 int
 mul_nums(struct stack *s)
 {
@@ -59,6 +66,9 @@ mul_nums(struct stack *s)
 	return 0;
 }
 
+/* The '/' command.
+ * Pops two values and divides the second by the first. Returns -1 on failed
+ * push. */
 int
 div_nums(struct stack *s)
 {
@@ -84,6 +94,9 @@ div_nums(struct stack *s)
 	return 0;
 }
 
+/* The '%' command.
+ * Pops two values and calculates the second one modulo the first one. Returns
+ * -1 on failed push. */
 int
 mod_nums(struct stack *s)
 {
@@ -106,6 +119,9 @@ mod_nums(struct stack *s)
 	return stack_push(s, (int)val2 % (int)val1);
 }
 
+/* The '^' command.
+ * Pops two values. The first is the exponent, the second is the base.
+ * Calculates base to the power of exp. Returns -1 on failed push. */
 int
 exp_nums(struct stack *s)
 {
@@ -122,6 +138,8 @@ exp_nums(struct stack *s)
 	return stack_push(s, pow(base, exp));
 }
 
+/* The 'v' command.
+ * Pops one value and computes its square root. Returns -1 on failed push. */
 int
 sqrt_num(struct stack *s)
 {
@@ -137,6 +155,9 @@ sqrt_num(struct stack *s)
 	return stack_push(s, sqrt(val));
 }
 
+/* The '~' command.
+ * Pops two values. Divide the second by the first. Push the quotient, then the
+ * remainder. */
 int
 divmod_nums(struct stack *s)
 {
@@ -162,6 +183,10 @@ divmod_nums(struct stack *s)
 	return stack_push(s, (int)val2 % (int)val1);
 }
 
+/* The '|' command.
+ * Pops three values. The first is the modulus, the second is the exponent,
+ * the third is the base. Calculates (base^exponent) % mod. Returns -1 on
+ * failed push. */
 int
 modexp_nums(struct stack *s)
 {
