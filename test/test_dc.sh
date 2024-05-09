@@ -6,8 +6,8 @@ function dc_stripdots_nl () {
 
 function dc_operations () {
 	test_cmd="2.5 2.5 +p 10 5 -p 10 2 *p 50 25 /p 10 3 %p c 10 2 ~ f\
-		10 2^p 16 vp"
-	expected="5 5 20 2 1 0 5 100 4 "
+		10 2^p 16 vp 10 2 1001 |p"
+	expected="5 5 20 2 1 0 5 100 4 100 "
 	got=$(dc_stripdots_nl "$test_cmd")
 
 	#echo "expected $expected"

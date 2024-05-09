@@ -7,16 +7,13 @@ add_nums(struct stack *s)
 {
 	double val1, val2;
 
-	if (stack_pop(s, &val1) == -1) {
+	if (stack_empty(s, 2)) {
 		puts("stack empty");
 		return 0;
 	}
 
-	if (stack_pop(s, &val2) == -1) {
-		puts("stack empty");
-		stack_push(s, val1);
-		return 0;
-	}
+	stack_pop(s, &val1);
+	stack_pop(s, &val2);
 
 	if (stack_push(s, val2 + val1) == -1)
 		return -1;
@@ -29,16 +26,13 @@ sub_nums(struct stack *s)
 {
 	double val1, val2;
 
-	if (stack_pop(s, &val1) == -1) {
+	if (stack_empty(s, 2)) {
 		puts("stack empty");
 		return 0;
 	}
 
-	if (stack_pop(s, &val2) == -1) {
-		puts("stack empty");
-		stack_push(s, val1);
-		return 0;
-	}
+	stack_pop(s, &val1);
+	stack_pop(s, &val2);
 
 	if (stack_push(s, val2 - val1) == -1)
 		return -1;
@@ -51,16 +45,13 @@ mul_nums(struct stack *s)
 {
 	double val1, val2;
 
-	if (stack_pop(s, &val1) == -1) {
+	if (stack_empty(s, 2)) {
 		puts("stack empty");
 		return 0;
 	}
 
-	if (stack_pop(s, &val2) == -1) {
-		puts("stack empty");
-		stack_push(s, val1);
-		return 0;
-	}
+	stack_pop(s, &val1);
+	stack_pop(s, &val2);
 
 	if (stack_push(s, val2 * val1) == -1)
 		return -1;
@@ -73,16 +64,19 @@ div_nums(struct stack *s)
 {
 	double val1, val2;
 
-	if (stack_pop(s, &val1) == -1) {
+	if (stack_empty(s, 2)) {
 		puts("stack empty");
 		return 0;
 	}
 
-	if (stack_pop(s, &val2) == -1) {
-		puts("stack empty");
-		stack_push(s, val1);
+	stack_pop(s, &val1);
+
+	if (val1 == 0) {
+		puts("division by 0");
 		return 0;
 	}
+
+	stack_pop(s, &val2);
 
 	if (stack_push(s, val2 / val1) == -1)
 		return -1;
@@ -95,44 +89,37 @@ mod_nums(struct stack *s)
 {
 	double val1, val2;
 
-	if (stack_pop(s, &val1) == -1) {
+	if (stack_empty(s, 2)) {
 		puts("stack empty");
 		return 0;
 	}
 
-	if (stack_pop(s, &val2) == -1) {
-		puts("stack empty");
-		stack_push(s, val1);
-		return 0;
+	stack_pop(s, &val1);
+
+	if (val1 == 0) {
+		puts("division by 0");
+		return stack_push(s, val1);
 	}
 
-	/* this shitty thing is temporary. */
-	if (stack_push(s, (int)val2 % (int)val1) == -1)
-		return -1;
+	stack_pop(s, &val2);
 
-	return 0;
+	return stack_push(s, (int)val2 % (int)val1);
 }
 
 int
 exp_nums(struct stack *s)
 {
-	double val1, val2;
+	double base, exp;
 
-	if (stack_pop(s, &val1) == -1) {
+	if (stack_empty(s, 2)) {
 		puts("stack empty");
 		return 0;
 	}
 
-	if (stack_pop(s, &val2) == -1) {
-		puts("stack empty");
-		stack_push(s, val1);
-		return 0;
-	}
+	stack_pop(s, &exp);
+	stack_pop(s, &base);
 
-	if (stack_push(s, pow(val2, val1)) == -1)
-		return -1;
-
-	return 0;
+	return stack_push(s, pow(base, exp));
 }
 
 int
@@ -140,16 +127,14 @@ sqrt_num(struct stack *s)
 {
 	double val;
 
-	if (stack_pop(s, &val) == -1) {
+	if (stack_empty(s, 1)) {
 		puts("stack empty");
-		stack_push(s, val);
 		return 0;
 	}
 
-	if (stack_push(s, sqrt(val)) == -1)
-		return -1;
+	stack_pop(s, &val);
 
-	return 0;
+	return stack_push(s, sqrt(val));
 }
 
 int
@@ -157,22 +142,46 @@ divmod_nums(struct stack *s)
 {
 	double val1, val2;
 
-	if (stack_pop(s, &val1) == -1) {
+	if (stack_empty(s, 2)) {
 		puts("stack empty");
 		return 0;
 	}
 
-	if (stack_pop(s, &val2) == -1) {
+	stack_pop(s, &val1);
+
+	if (val1 == 0) {
+		puts("division by zero");
+		return stack_push(s, val1);
+	}
+
+	stack_pop(s, &val2);
+
+	if (stack_push(s, val2 / val1) == -1)
+		return -1;
+
+	return stack_push(s, (int)val2 % (int)val1);
+}
+
+int
+modexp_nums(struct stack *s)
+{
+	double mod, base, exp;
+
+	if (stack_empty(s, 3)) {
 		puts("stack empty");
-		stack_push(s, val1);
 		return 0;
 	}
 
-	if (stack_push(s, (int)val2 / (int)val1) == -1)
-		return -1;
+	stack_pop(s, &mod);
 
-	if (stack_push(s, (int)val2 % (int)val1) == -1)
-		return -1;
+	if (mod == 0) {
+		puts("mod can't be 0");
+		return stack_push(s, mod);
+	}
 
-	return 0;
+	stack_pop(s, &exp);
+	stack_pop(s, &base);
+
+	/* :( */
+	return stack_push(s, (int)pow(base, exp) % (int)mod);
 }

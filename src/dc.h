@@ -24,6 +24,7 @@ int mod_nums(struct stack *s);
 int exp_nums(struct stack *s);
 int sqrt_num(struct stack *s);
 int divmod_nums(struct stack *s);
+int modexp_nums(struct stack *s);
 
 /** printing **/
 void print_head(struct stack *s);
