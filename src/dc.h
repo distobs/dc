@@ -19,6 +19,7 @@ int modexp_nums(struct stack *s);
 void print_head(struct stack *s);
 void print_stack(struct stack *s);
 void pop_and_print(struct stack *s);
+void pop_and_print_nonl(struct stack *s);
 
 /* registers */
 int copy_from_reg_and_push(struct machine *m, size_t reg);

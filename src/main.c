@@ -74,6 +74,9 @@ do_line(char *cmd, struct machine *m)
 			case 'l':
 				rv = copy_from_reg_and_push(m, *(++cmd));
 				break;
+			case 'n':
+				pop_and_print_nonl(STACKP(m, SMAIN));
+				break;
 			case 's':
 				rv = pop_and_store_into_reg(m, *(++cmd));
 				break;

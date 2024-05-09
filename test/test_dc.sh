@@ -21,8 +21,8 @@ function dc_operations () {
 }
 
 function dc_printing () {
-	test_cmd="10 p P p 10 20 40 f"
-	expected="10 10 stack empty 40 20 10 "
+	test_cmd="10 p P p 10 20 40 f 10 n"
+	expected="10 10 stack empty 40 20 10 10"
 	got=$(dc_stripdots_nl "$test_cmd")
 
 	#echo "expected $expected"
