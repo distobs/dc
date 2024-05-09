@@ -1,13 +1,13 @@
 #include <math.h>
 #include <stdio.h>
-#include "stack.h"
+#include "machine.h"
 
 int
 add_nums(struct stack *s)
 {
 	double val1, val2;
 
-	if (stack_empty(s, 2)) {
+	if (!STACK_ENOUGH(s, 2)) {
 		puts("stack empty");
 		return 0;
 	}
@@ -26,7 +26,7 @@ sub_nums(struct stack *s)
 {
 	double val1, val2;
 
-	if (stack_empty(s, 2)) {
+	if (!STACK_ENOUGH(s, 2)) {
 		puts("stack empty");
 		return 0;
 	}
@@ -45,7 +45,7 @@ mul_nums(struct stack *s)
 {
 	double val1, val2;
 
-	if (stack_empty(s, 2)) {
+	if (!STACK_ENOUGH(s, 2)) {
 		puts("stack empty");
 		return 0;
 	}
@@ -64,7 +64,7 @@ div_nums(struct stack *s)
 {
 	double val1, val2;
 
-	if (stack_empty(s, 2)) {
+	if (!STACK_ENOUGH(s, 2)) {
 		puts("stack empty");
 		return 0;
 	}
@@ -89,7 +89,7 @@ mod_nums(struct stack *s)
 {
 	double val1, val2;
 
-	if (stack_empty(s, 2)) {
+	if (!STACK_ENOUGH(s, 2)) {
 		puts("stack empty");
 		return 0;
 	}
@@ -111,7 +111,7 @@ exp_nums(struct stack *s)
 {
 	double base, exp;
 
-	if (stack_empty(s, 2)) {
+	if (!STACK_ENOUGH(s, 2)) {
 		puts("stack empty");
 		return 0;
 	}
@@ -127,7 +127,7 @@ sqrt_num(struct stack *s)
 {
 	double val;
 
-	if (stack_empty(s, 1)) {
+	if (!STACK_ENOUGH(s, 1)) {
 		puts("stack empty");
 		return 0;
 	}
@@ -142,7 +142,7 @@ divmod_nums(struct stack *s)
 {
 	double val1, val2;
 
-	if (stack_empty(s, 2)) {
+	if (!STACK_ENOUGH(s, 2)) {
 		puts("stack empty");
 		return 0;
 	}
@@ -167,7 +167,7 @@ modexp_nums(struct stack *s)
 {
 	double mod, base, exp;
 
-	if (stack_empty(s, 3)) {
+	if (!STACK_ENOUGH(s, 3)) {
 		puts("stack empty");
 		return 0;
 	}

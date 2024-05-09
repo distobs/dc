@@ -52,7 +52,7 @@ do_line(char *cmd, struct machine *m)
 				rv = modexp_nums(STACKP(m, SMAIN));
 				break;
 			case 'c':
-				stack_clean(STACKP(m, SMAIN));
+				STACK_CLEAN(STACKP(m, SMAIN));
 				break;
 			case 'd':
 				rv = head_dup(STACKP(m, SMAIN));

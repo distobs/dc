@@ -9,10 +9,11 @@ struct machine {
 	struct stack registers[REGISTERS];
 };
 
-#define SMAIN (-1)
-#define STACKP(m, reg)	((reg == SMAIN) ? (&(m->main_stack)) : \
-				 (&(m->registers[reg])))
-#define MACHINE_STACK_EMPTY(m, reg) (STACK_EMPTY(STACKP(m, reg)))
+#define SMAIN				(-1)
+#define STACK_ENOUGH(s, needed)		((s->head) >= (needed - 1))
+#define STACKP(m, reg)			((reg == SMAIN) ? (&(m->main_stack)) : \
+					 (&(m->registers[reg])))
+#define MACHINE_STACK_EMPTY(m, reg)	(STACK_EMPTY(STACKP(m, reg)))
 
 void	init_machine(struct machine *m);
 double	machine_shead(struct machine *m, size_t reg);
