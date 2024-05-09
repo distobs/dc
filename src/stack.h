@@ -2,7 +2,6 @@
 #define STACK_H
 
 #include <sys/types.h>
-#include <stddef.h>
 
 #define GROW_BY 50
 
