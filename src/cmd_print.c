@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "stack.h"
+#include "dc.h"
 
 void
 print_head(struct stack *s)

@@ -1,9 +1,9 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "dc.h" /* #include "stack.h" */
+#include "dc.h"
 
-int
+static int
 do_line(char *cmd, struct machine *m)
 {
 	int rv = 0;
@@ -113,6 +113,5 @@ main(void)
 		}
 	}
 
-	/* never reached */
 	return 0;
 }

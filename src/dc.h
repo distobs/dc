@@ -2,10 +2,6 @@
 #define DC_H
 
 #include "machine.h"
-#include "stack.h"
-
-/* main */
-int	do_line(char *cmd, struct machine *m);
 
 /* dc_commands */
 /** operations **/

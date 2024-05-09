@@ -1,6 +1,6 @@
 #include <math.h>
 #include <stdio.h>
-#include "machine.h"
+#include "dc.h"
 
 int
 add_nums(struct stack *s)
