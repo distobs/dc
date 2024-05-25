@@ -21,7 +21,7 @@ get_num(char **cmd, struct machine *m)
 		if (*cmd == cmdorig && !is_dot) {
 			puts("expected digit after _");
 		} else if (machine_push(m, num, SMAIN) == -1) {
-			perror("failed allocation on function get_num");
+			print_err("get_num");
 			return -1;
 		}
 	}
