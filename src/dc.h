@@ -3,6 +3,9 @@
 
 #include "machine.h"
 
+/* main */
+void print_err(const char *s);
+
 /* dc_commands */
 /** operations **/
 int add_nums(struct stack *s);

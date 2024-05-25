@@ -17,8 +17,10 @@ add_nums(struct stack *s)
 	stack_pop(s, &val1);
 	stack_pop(s, &val2);
 
-	if (stack_push(s, val2 + val1) == -1)
+	if (stack_push(s, val2 + val1) == -1) {
+		print_err("add_nums");
 		return -1;
+	}
 
 	return 0;
 }
@@ -39,8 +41,10 @@ sub_nums(struct stack *s)
 	stack_pop(s, &val1);
 	stack_pop(s, &val2);
 
-	if (stack_push(s, val2 - val1) == -1)
+	if (stack_push(s, val2 - val1) == -1) {
+		print_err("sub_nums");
 		return -1;
+	}
 
 	return 0;
 }
@@ -60,8 +64,10 @@ mul_nums(struct stack *s)
 	stack_pop(s, &val1);
 	stack_pop(s, &val2);
 
-	if (stack_push(s, val2 * val1) == -1)
+	if (stack_push(s, val2 * val1) == -1) {
+		print_err("mul_nums");
 		return -1;
+	}
 
 	return 0;
 }
@@ -88,8 +94,10 @@ div_nums(struct stack *s)
 
 	stack_pop(s, &val2);
 
-	if (stack_push(s, val2 / val1) == -1)
+	if (stack_push(s, val2 / val1) == -1) {
+		print_err("div_nums");
 		return -1;
+	}
 
 	return 0;
 }
@@ -116,7 +124,12 @@ mod_nums(struct stack *s)
 
 	stack_pop(s, &val2);
 
-	return stack_push(s, (int)val2 % (int)val1);
+	if (stack_push(s, (int)val2 % (int)val1) == -1) {
+		print_err("mod_nums");
+		return -1;
+	}
+
+	return 0;
 }
 
 /* The '^' command.
@@ -135,7 +148,12 @@ exp_nums(struct stack *s)
 	stack_pop(s, &exp);
 	stack_pop(s, &base);
 
-	return stack_push(s, pow(base, exp));
+	if (stack_push(s, pow(base, exp)) == -1) {
+		print_err("exp_nums");
+		return -1;
+	}
+
+	return 0;
 }
 
 /* The 'v' command.
@@ -152,7 +170,12 @@ sqrt_num(struct stack *s)
 
 	stack_pop(s, &val);
 
-	return stack_push(s, sqrt(val));
+	if (stack_push(s, sqrt(val)) == -1) {
+		print_err("sqrt_num");
+		return -1;
+	}
+
+	return 0;
 }
 
 /* The '~' command.
@@ -180,7 +203,12 @@ divmod_nums(struct stack *s)
 	if (stack_push(s, val2 / val1) == -1)
 		return -1;
 
-	return stack_push(s, (int)val2 % (int)val1);
+	if (stack_push(s, (int)val2 % (int)val1) == -1) {
+		print_err("divmod_nums");
+		return -1;
+	}
+
+	return 0;
 }
 
 /* The '|' command.
@@ -208,5 +236,10 @@ modexp_nums(struct stack *s)
 	stack_pop(s, &base);
 
 	/* :( */
-	return stack_push(s, (int)pow(base, exp) % (int)mod);
+	if (stack_push(s, (int)pow(base, exp) % (int)mod) == -1) {
+		print_err("divmod_nums");
+		return -1;
+	}
+
+	return 0;
 }

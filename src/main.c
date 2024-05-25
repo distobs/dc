@@ -21,6 +21,7 @@ get_num(char **cmd, struct machine *m)
 		if (*cmd == cmdorig && !is_dot) {
 			puts("expected digit after _");
 		} else if (machine_push(m, num, SMAIN) == -1) {
+			perror("failed allocation on function get_num");
 			return -1;
 		}
 	}
@@ -40,10 +41,10 @@ do_line(char *cmd, struct machine *m)
 
 		switch (*cmd) {
 			case '+':
-				rv = add_nums(m->main_stack);
+				rv = add_nums(m->main_stack); //
 				break;
 			case '-':
-				rv = sub_nums(m->main_stack);
+				rv = sub_nums(m->main_stack); //
 				break;
 			case '*':
 				rv = mul_nums(m->main_stack);
@@ -102,6 +103,12 @@ do_line(char *cmd, struct machine *m)
 	}
 
 	return rv;
+}
+
+void
+print_err(const char *s)
+{
+	fprintf(stderr, "failed allocation in function %s\n", s);
 }
 
 int

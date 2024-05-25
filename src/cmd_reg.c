@@ -17,8 +17,10 @@ copy_from_reg_and_push(struct machine *m, size_t reg)
 		return 0;
 	}
 
-	if (machine_push(m, machine_head(m, reg), SMAIN) == -1)
+	if (machine_push(m, machine_head(m, reg), SMAIN) == -1) {
+		print_err("copy_from_reg_and_push");
 		return -1;
+	}
 
 	return 0;
 }
@@ -40,8 +42,10 @@ pop_and_store_into_reg(struct machine *m, size_t reg)
 		return 0;
 	}
 
-	if (machine_push(m, val, reg) == -1)
+	if (machine_push(m, val, reg) == -1) {
+		print_err("pop_and_store_into_reg");
 		return -1;
+	}
 
 	return 0;
 }

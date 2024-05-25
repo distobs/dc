@@ -5,5 +5,10 @@
 int
 head_dup(struct stack *s)
 {
-	return stack_push(s, STACK_HEAD(s));
+	if (stack_push(s, STACK_HEAD(s)) == -1) {
+		print_err("head_dup");
+		return -1;
+	}
+
+	return 0;
 }
