@@ -2,16 +2,22 @@
 #include "machine.h"
 
 /* stack_inits the whole machine */
-void
+int
 machine_init(struct machine *m)
 {
 	m->main_stack = malloc(sizeof(struct stack));
+
+	if (m->main_stack == NULL) {
+		return -1;
+	}
+
 	stack_init(m->main_stack);
 
 	for (size_t i = 0; i < REGISTERS; ++i) {
-		m->registers[i] = malloc(sizeof(struct stack));
-		stack_init(m->registers[i]);
+		m->registers[i] = NULL;
 	}
+
+	return 0;
 }
 
 int
@@ -69,7 +75,21 @@ machine_destroy(struct machine *m)
 	free(m->main_stack);
 
 	for (i = 0; i < REGISTERS; ++i) {
-		stack_destroy(m->registers[i]);
-		free(m->registers[i]);
+		if (m->registers[i] != NULL) {
+			stack_destroy(m->registers[i]);
+			free(m->registers[i]);
+		}
 	}
+}
+
+int
+register_init(struct machine *m, size_t reg)
+{
+	m->registers[reg] = malloc(sizeof(struct stack));
+
+	if (m->registers[reg] == NULL) {
+		return -1;
+	}
+
+	return 0;
 }

@@ -34,8 +34,9 @@ do_line(char *cmd, struct machine *m)
 {
 	int rv = 0;
 	while (*cmd) {
-		if (get_num(&cmd, m) == -1)
+		if (get_num(&cmd, m) == -1) {
 			return -1;
+		}
 
 		switch (*cmd) {
 			case '+':
@@ -93,10 +94,11 @@ do_line(char *cmd, struct machine *m)
 				break;
 		}
 
-		if (rv == -1)
+		if (rv == -1) {
 			return -1;
-		else
+		} else {
 			++cmd;
+		}
 	}
 
 	return rv;
