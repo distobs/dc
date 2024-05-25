@@ -9,13 +9,13 @@ struct machine {
 	struct stack *registers[REGISTERS];
 };
 
-#define SMAIN				(-1)
-#define MACHINE_STACK_EMPTY(m, reg)	(stack_empty(m-
+#define SMAIN (-1)
 
-void	destroy_machine(struct machine *m);
-void	init_machine(struct machine *m);
-double	machine_shead(struct machine *m, size_t reg);
-int	machine_spop(struct machine *m, double *val, size_t reg);
-int	machine_spush(struct machine *m, double val, size_t reg);
+void	machine_destroy(struct machine *m);
+int	machine_empty(struct machine *m, size_t reg);
+double	machine_head(struct machine *m, size_t reg);
+void	machine_init(struct machine *m);
+int	machine_pop(struct machine *m, double *val, size_t reg);
+int	machine_push(struct machine *m, double val, size_t reg);
 
 #endif

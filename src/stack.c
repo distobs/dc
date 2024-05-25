@@ -4,7 +4,15 @@
 void
 stack_destroy(struct stack *s)
 {
+	s->head = -1;
+	s->size = -1;
 	free(s->stk);
+}
+
+int
+stack_empty(struct stack *s)
+{
+	return (s->head == -1);
 }
 
 int
@@ -32,7 +40,7 @@ stack_init(struct stack *s)
 int
 stack_pop(struct stack *s, double *val)
 {
-	if (STACK_EMPTY(s))
+	if (stack_empty(s))
 		return -1;
 
 	*val = s->stk[s->head--];

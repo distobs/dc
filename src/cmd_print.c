@@ -6,7 +6,7 @@
 void
 print_head(struct stack *s)
 {
-	if (STACK_EMPTY(s)) {
+	if (stack_empty(s)) {
 		puts("stack empty");
 		return;
 	}
@@ -21,7 +21,7 @@ print_stack(struct stack *s)
 {
 	int i;
 
-	if (STACK_EMPTY(s)) {
+	if (stack_empty(s)) {
 		puts("stack empty");
 		return;
 	}

@@ -20,7 +20,7 @@ get_num(char **cmd, struct machine *m)
 
 		if (*cmd == cmdorig && !is_dot) {
 			puts("expected digit after _");
-		} else if (machine_spush(m, num, SMAIN) == -1) {
+		} else if (machine_push(m, num, SMAIN) == -1) {
 			return -1;
 		}
 	}
@@ -63,7 +63,7 @@ do_line(char *cmd, struct machine *m)
 				rv = modexp_nums(m->main_stack);
 				break;
 			case 'c':
-				STACK_CLEAN(m->main_stack);
+				stack_destroy(m->main_stack);
 				break;
 			case 'd':
 				rv = head_dup(m->main_stack);
@@ -108,21 +108,21 @@ main(void)
 	char		buf[1024];
 	struct machine	m;
 
-	init_machine(&m);
+	machine_init(&m);
 
 	while (1) {
 		if (fgets(buf, 1024, stdin) == NULL) {
 			if (ferror(stdin)) {
-				destroy_machine(&m);
+				machine_destroy(&m);
 				exit(1);
 			} else if (feof(stdin)) {
-				destroy_machine(&m);
+				machine_destroy(&m);
 				exit(0);
 			}
 		}
 
 		if (do_line(buf, &m) == -1) {
-			destroy_machine(&m);
+			machine_destroy(&m);
 			exit(1);
 		}
 	}

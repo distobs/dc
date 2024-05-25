@@ -12,11 +12,10 @@ struct stack {
 	size_t	 size;	/* The size allocated for the stack. */
 };
 
-#define STACK_CLEAN(s)	(s->head = -1)
-#define STACK_EMPTY(s)	(s->head == -1)
 #define STACK_HEAD(s)	(s->stk[s->head])
 
 void	stack_destroy(struct stack *s);
+int	stack_empty(struct stack *s);
 int	stack_enough(struct stack *s, unsigned needed);
 int	stack_grow(struct stack *s);
 void	stack_init(struct stack *s);
