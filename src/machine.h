@@ -5,15 +5,12 @@
 
 #define REGISTERS 256
 struct machine {
-	struct stack main_stack;
-	struct stack registers[REGISTERS];
+	struct stack *main_stack;
+	struct stack *registers[REGISTERS];
 };
 
 #define SMAIN				(-1)
-#define STACK_ENOUGH(s, needed)		((s->head) >= (needed - 1))
-#define STACKP(m, reg)			((reg == SMAIN) ? (&(m->main_stack)) : \
-					 (&(m->registers[reg])))
-#define MACHINE_STACK_EMPTY(m, reg)	(STACK_EMPTY(STACKP(m, reg)))
+#define MACHINE_STACK_EMPTY(m, reg)	(stack_empty(m-
 
 void	destroy_machine(struct machine *m);
 void	init_machine(struct machine *m);

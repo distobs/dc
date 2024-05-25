@@ -8,6 +8,12 @@ stack_destroy(struct stack *s)
 }
 
 int
+stack_enough(struct stack *s, unsigned needed)
+{
+	return (s->head >= (needed - 1));
+}
+
+int
 stack_grow(struct stack *s)
 {
 	s->stk = realloc(s->stk, (s->size += GROW_BY) * sizeof(s->stk[0]));

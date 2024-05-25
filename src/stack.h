@@ -17,7 +17,7 @@ struct stack {
 #define STACK_HEAD(s)	(s->stk[s->head])
 
 void	stack_destroy(struct stack *s);
-int	stack_empty(struct stack *s, unsigned needed);
+int	stack_enough(struct stack *s, unsigned needed);
 int	stack_grow(struct stack *s);
 void	stack_init(struct stack *s);
 int	stack_pop(struct stack *s, double *val);
