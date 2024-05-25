@@ -66,8 +66,10 @@ machine_destroy(struct machine *m)
 {
 	int i;
 	stack_destroy(m->main_stack);
+	free(m->main_stack);
 
 	for (i = 0; i < REGISTERS; ++i) {
 		stack_destroy(m->registers[i]);
+		free(m->registers[i]);
 	}
 }

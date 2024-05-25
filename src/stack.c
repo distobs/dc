@@ -5,7 +5,7 @@ void
 stack_destroy(struct stack *s)
 {
 	s->head = -1;
-	s->size = -1;
+	s->size = 0;
 	free(s->stk);
 }
 
@@ -51,9 +51,7 @@ stack_pop(struct stack *s, double *val)
 int
 stack_push(struct stack *s, double val)
 {
-	/* converting to ssize_t to avoid underflow in the cases where
-	 * size = 0. */
-	if (s->head == ((ssize_t)s->size - 1)) {
+	if (s->size == 0 || s->head == (s->size - 1)) {
 		if (stack_grow(s) == -1)
 			return -1;
 	}
