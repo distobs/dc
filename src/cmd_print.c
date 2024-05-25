@@ -11,7 +11,7 @@ print_head(struct stack *s)
 		return;
 	}
 
-	printf("%f\n", STACK_HEAD(s));
+	printf("%f\n", stack_head(s));
 }
 
 /* The 'f' command.
@@ -26,7 +26,7 @@ print_stack(struct stack *s)
 		return;
 	}
 
-	for (i = s->head; i >= 0; --i) {
+	for (i = s->sp; i >= 0; --i) {
 		printf("%f\n", s->stk[i]);
 	}
 }

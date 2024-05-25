@@ -8,16 +8,14 @@
 
 struct stack {
 	double	*stk;	/* The stack. */
-	ssize_t	 head;	/* (stack empty) ? -1 : the stack's head */
+	ssize_t	 sp;	/* The stack pointer. -1 if the stack is empty. */
 	size_t	 size;	/* The size allocated for the stack. */
 };
-
-#define STACK_HEAD(s)	(s->stk[s->head])
 
 void	stack_destroy(struct stack *s);
 int	stack_empty(struct stack *s);
 int	stack_enough(struct stack *s, unsigned needed);
-int	stack_grow(struct stack *s);
+double	stack_head(struct stack *s);
 void	stack_init(struct stack *s);
 int	stack_pop(struct stack *s, double *val);
 int	stack_push(struct stack *s, double val);

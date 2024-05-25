@@ -36,9 +36,9 @@ double
 machine_head(struct machine *m, size_t reg)
 {
 	if (reg == SMAIN) {
-		return STACK_HEAD(m->main_stack);
+		return stack_head(m->main_stack);
 	} else {
-		return STACK_HEAD(m->registers[reg]);
+		return stack_head(m->registers[reg]);
 	}
 }
 
