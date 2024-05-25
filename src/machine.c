@@ -1,7 +1,10 @@
 #include <stdlib.h>
 #include "machine.h"
 
-/* stack_inits the whole machine */
+/* machine_init:
+ * This function initializes the main stack and sets all of the registers to
+ * NULL, for lazy allocating them later. It returns -1 if allocating the main
+ * stack fails, and 0 otherwise. */
 int
 machine_init(struct machine *m)
 {
@@ -20,6 +23,9 @@ machine_init(struct machine *m)
 	return 0;
 }
 
+/* machine_empty:
+ * Returns true if reg's stack is empty, or if the main stack is empty if reg
+ * == SMAIN */
 int
 machine_empty(struct machine *m, size_t reg)
 {
@@ -30,8 +36,9 @@ machine_empty(struct machine *m, size_t reg)
 	}
 }
 
-/* Returns reg register's stack's head, or the main stack's head if reg ==
- * SMAIN. CAUTION: always check for empty stack before using. */
+/* machine_head:
+ * Returns the value at the top of reg's stack, or that at the top of the main
+ * stack if reg == SMAIN. */
 double
 machine_head(struct machine *m, size_t reg)
 {
@@ -42,8 +49,10 @@ machine_head(struct machine *m, size_t reg)
 	}
 }
 
-/* Pops from the reg register's stack, or from the main stack if reg == SMAIN.
- * Returns -1 on empty stack. */
+/* machine_pop:
+ * Does a pop operation on reg's stack, or on the main stack if reg == SMAIN.
+ * Stores the popped value inside val if val != NULL. Returns -1 if the stack
+ * popped from is empty, and 0 otherwise. */
 int
 machine_pop(struct machine *m, double *val, size_t reg)
 {
@@ -54,8 +63,9 @@ machine_pop(struct machine *m, double *val, size_t reg)
 	}
 }
 
-/* Pushes onto the reg register's stack, or onto the main stack if reg ==
- * SMAIN. Returns -1 on failed push. */
+/* machine_push:
+ * Does a push operation on reg's stack, or on the main stack if reg == SMAIN.
+ * Returns -1 on failed allocation if the stack is full, and 0 otherwise. */
 int
 machine_push(struct machine *m, double val, size_t reg)
 {
@@ -66,7 +76,10 @@ machine_push(struct machine *m, double val, size_t reg)
 	}
 }
 
-/* stack_destroys the whole machine */
+/* machine_destroy:
+ * Destroys the main stack and frees the pointer to it inside the machine.
+ * Destroys all the initialized registers and frees the pointers to them inside
+ * the machine. */
 void
 machine_destroy(struct machine *m)
 {
@@ -82,6 +95,8 @@ machine_destroy(struct machine *m)
 	}
 }
 
+/* register_init:
+ * Initializes a register. Returns -1 on failed allocation. */
 int
 register_init(struct machine *m, size_t reg)
 {

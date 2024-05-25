@@ -9,7 +9,9 @@ int
 copy_from_reg_and_push(struct machine *m, size_t reg)
 {
 	if (m->registers[reg] == NULL) {
-		register_init(m, reg);
+		if (register_init(m, reg) == -1) {
+			print_err("copy_from_reg_and_push");
+		}
 	}
 
 	if (machine_empty(m, reg)) {

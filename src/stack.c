@@ -62,22 +62,26 @@ stack_init(struct stack *s)
 }
 
 /* stack_pop:
- * Does a pop operation on the s stack. Returns -1 if the stack is empty, and
- * 0 otherwise. */
+ * Does a pop operation on the s stack. Stores the popped value inside val if
+ * val != NULL Returns -1 if the stack is empty, and 0 otherwise. */
 int
 stack_pop(struct stack *s, double *val)
 {
 	if (stack_empty(s))
 		return -1;
 
-	*val = s->stk[s->sp--];
+	if (val != NULL) {
+		*val = s->stk[s->sp];
+	}
+
+	--s->sp;
 
 	return 0;
 }
 
 /* stack_push:
- * Does a push operation on the s stack. Returns -1 if a failed allocation
- * happens, and 0 otherwise. */
+ * Pushes val onto the s stack. Returns -1 if a failed allocation happens, and
+ * 0 otherwise. */
 int
 stack_push(struct stack *s, double val)
 {
