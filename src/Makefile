@@ -1,7 +1,11 @@
 SRC = cmd_op.c cmd_print.c cmd_reg.c cmd_smanip.c machine.c main.c stack.c
 
-#CFLAGS = -o dc -pedantic -std=c99 -Wall
-CFLAGS = -o dc -pedantic -std=c99 -Wall -O0 -g -lm
+ifeq ($(DEBUG), 1)
+	CFLAGS = -o dc -pedantic -std=c99 -Wall -O0 -lm -ggdb3 \
+		 -fsanitize=address,undefined
+else
+	CFLAGS = -o dc -pedantic -std=c99 -Wall -O2 -lm
+endif
 
 all: dc
 

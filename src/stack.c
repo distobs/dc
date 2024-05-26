@@ -10,6 +10,7 @@ stack_destroy(struct stack *s)
 	s->sp = -1;
 	s->size = 0;
 	free(s->stk);
+	s->stk = NULL;
 }
 
 /* stack_empty:
