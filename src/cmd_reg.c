@@ -11,6 +11,7 @@ copy_from_reg_and_push(struct machine *m, size_t reg)
 	if (m->registers[reg] == NULL) {
 		if (register_init(m, reg) == -1) {
 			print_err("copy_from_reg_and_push");
+			return -1;
 		}
 	}
 
@@ -36,7 +37,10 @@ pop_and_store_into_reg(struct machine *m, size_t reg)
 	double val;
 
 	if (m->registers[reg] == NULL) {
-		register_init(m, reg);
+		if (register_init(m, reg) == -1) {
+			print_err("pop_and_store_into_reg");
+			return -1;
+		}
 	}
 
 	if (machine_pop(m, &val, SMAIN) == -1) {
