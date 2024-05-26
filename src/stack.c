@@ -87,8 +87,9 @@ int
 stack_push(struct stack *s, double val)
 {
 	if (s->size == 0 || s->sp == (s->size - 1)) {
-		if (stack_grow(s) == -1)
+		if (stack_grow(s) == -1) {
 			return -1;
+		}
 	}
 
 	s->stk[++s->sp] = val;

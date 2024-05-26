@@ -96,7 +96,8 @@ machine_destroy(struct machine *m)
 }
 
 /* register_init:
- * Initializes a register. Returns -1 on failed allocation. */
+ * Allocates space for a register and initializes its stack. Returns -1 on
+ * failed allocation, and 0 otherwise. */
 int
 register_init(struct machine *m, size_t reg)
 {
@@ -105,6 +106,8 @@ register_init(struct machine *m, size_t reg)
 	if (m->registers[reg] == NULL) {
 		return -1;
 	}
+
+	stack_init(m->registers[reg]);
 
 	return 0;
 }
