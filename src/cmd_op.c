@@ -193,7 +193,7 @@ divmod_nums(struct stack *s)
 
 	stack_pop(s, &val1);
 
-	if (val1 == 0) {
+	if ((int)val1 == 0) {
 		puts("division by zero");
 		return stack_push(s, val1);
 	}
@@ -237,7 +237,7 @@ modexp_nums(struct stack *s)
 
 	/* :( */
 	if (stack_push(s, (int)pow(base, exp) % (int)mod) == -1) {
-		print_err("divmod_nums");
+		print_err("modexp_nums");
 		return -1;
 	}
 
