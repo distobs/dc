@@ -23,6 +23,16 @@ page for GNU dc:
 - Strings.
 
 -------------------------------------------------------------------------------
+                                     building
+-------------------------------------------------------------------------------
+
+Simply run make to build it. The dc binary will be placed at the src folder.
+Use make DEBUG=1 to build with debug symbols and sanitizers. Use make test to
+run tests. Those tests don't really test every single edge case; they just
+guarantee that the program runs decently enough. For the rest, I use a
+fuzzy tester that was recommended to me by u/skeeto (thanks).
+
+-------------------------------------------------------------------------------
                                      license
 -------------------------------------------------------------------------------
 
