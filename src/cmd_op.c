@@ -117,7 +117,7 @@ mod_nums(struct stack *s)
 
 	stack_pop(s, &val1);
 
-	if (val1 == 0) {
+	if ((int)val1 == 0) {
 		puts("division by 0");
 		return stack_push(s, val1);
 	}
@@ -227,8 +227,8 @@ modexp_nums(struct stack *s)
 
 	stack_pop(s, &mod);
 
-	if (mod == 0) {
-		puts("mod can't be 0");
+	if ((int)mod == 0) {
+		puts("division by 0");
 		return stack_push(s, mod);
 	}
 

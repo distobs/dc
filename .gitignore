@@ -4,3 +4,5 @@ cscope.out
 # :w! != :w1
 1
 core*
+testinput
+internal-testing/
