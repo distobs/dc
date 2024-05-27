@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include "dc.h"
 
-/* The 'd' command.
- * Duplicates the main stack's head. */
+/* head_dup: the 'd' command.
+ * Pushes the main stack's head to the main stack itself, duplicating it. The
+ * user is warned and 0 is returned if the stack is empty. Returns -1 on failed
+ * pushing, and 0 otherwise. */
 int
 head_dup(struct stack *s)
 {

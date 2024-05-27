@@ -2,9 +2,11 @@
 #include "dc.h"
 #include "machine.h"
 
-/* The 'lR' command.
- * Copies a value from the 'R' register's stack and pushes onto the main stack.
- * Returns -1 on failed push. */
+/* copy_from_reg_and_push: the 'lR' command.
+ * Pushes the specified register's head onto the main stack. If this is that
+ * register's first use, it is then initialized. If the register's stack is
+ * empty, the user is warned and 0 is returned. Returns -1 on failed push, or
+ * on failed register initialization, and 0 otherwise. */
 int
 copy_from_reg_and_push(struct machine *m, size_t reg)
 {
@@ -28,9 +30,12 @@ copy_from_reg_and_push(struct machine *m, size_t reg)
 	return 0;
 }
 
-/* The 'sR' command.
- * Pops a value from the main stack register and pushes onto the 'R' register's
- * stack. Returns -1 on failed push. */
+/* pop_and_store_into_reg: the 'sR' command.
+ * Pops a value from the main stack register and pushes it to the specified
+ * register's stack. If this is that register's first use, it is initialized
+ * before pushing. If the main stack is empty, the user is warned and 0 is
+ * returned. Returns -1 on failed push, or on failed register initialization,
+ * and 0 otherwise. */
 int
 pop_and_store_into_reg(struct machine *m, size_t reg)
 {
