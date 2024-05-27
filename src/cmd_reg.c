@@ -5,11 +5,18 @@
 /* copy_from_reg_and_push: the 'lR' command.
  * Pushes the specified register's head onto the main stack. If this is that
  * register's first use, it is then initialized. If the register's stack is
- * empty, the user is warned and 0 is returned. Returns -1 on failed push, or
- * on failed register initialization, and 0 otherwise. */
+ * empty, or if the register specified, when converted to an integer, is more
+ * than the maximum number of registers, the user is warned and 0 is returned.
+ * Returns -1 on failed push, or on failed register initialization, and 0
+ * otherwise. */
 int
 copy_from_reg_and_push(struct machine *m, size_t reg)
 {
+	if (reg > REGISTERS) {
+		printf("%c is an invalid register.\n", (unsigned char)reg);
+		return 0;
+	}
+
 	if (m->registers[reg] == NULL) {
 		if (register_init(m, reg) == -1) {
 			print_err("copy_from_reg_and_push");
@@ -33,13 +40,19 @@ copy_from_reg_and_push(struct machine *m, size_t reg)
 /* pop_and_store_into_reg: the 'sR' command.
  * Pops a value from the main stack register and pushes it to the specified
  * register's stack. If this is that register's first use, it is initialized
- * before pushing. If the main stack is empty, the user is warned and 0 is
- * returned. Returns -1 on failed push, or on failed register initialization,
- * and 0 otherwise. */
+ * before pushing. If the main stack is empty, or if the specified register,
+ * when converted to an integer, is greater than the maximum number of
+ * registers, the user is warned and 0 is returned. Returns -1 on failed push,
+ * or on failed register initialization, and 0 otherwise. */
 int
 pop_and_store_into_reg(struct machine *m, size_t reg)
 {
 	double val;
+
+	if (reg > REGISTERS) {
+		printf("%c is an invalid register.\n", (unsigned char)reg);
+		return 0;
+	}
 
 	if (m->registers[reg] == NULL) {
 		if (register_init(m, reg) == -1) {
