@@ -289,7 +289,9 @@ modexp_nums(struct stack *s)
 	stack_pop(s, &exp);
 	stack_pop(s, &base);
 
-	/* :( */
+	/* this actually fails if the user gives bad input, but this will be
+	 * addressed when bignum comes. an example of bad input is 0 ^ -0.5 =
+	 * 0 ^ -1/2 = sqrt(0^-1) = sqrt(1/0).*/
 	if (stack_push(s, (int)pow(base, exp) % (int)mod) == -1) {
 		print_err("modexp_nums");
 		return -1;
