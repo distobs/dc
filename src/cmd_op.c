@@ -280,7 +280,7 @@ modexp_nums(struct stack *s)
 
 		if (stack_push(s, mod) == -1) {
 			print_err("modexp_nums");
-			return -1
+			return -1;
 		}
 
 		return 0;
