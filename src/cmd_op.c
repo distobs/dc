@@ -134,12 +134,6 @@ mod_nums(struct stack *s)
 
 	if (!stack_enough(s, 2)) {
 		puts("stack empty");
-
-		if (stack_push(s, val1) == -1) {
-			print_err("mod_nums");
-			return -1;
-		}
-
 		return 0;
 	}
 
@@ -147,6 +141,12 @@ mod_nums(struct stack *s)
 
 	if ((int)val1 == 0) {
 		puts("division by 0");
+		if (stack_push(s, val1) == -1) {
+			print_err("mod_nums");
+			return -1;
+		}
+
+		return 0;
 	}
 
 	stack_pop(s, &val2);
