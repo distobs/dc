@@ -3,7 +3,7 @@
 
 /* stack_destroy:
  * This function "destroys" the stack, freeing its contents and resetting its
- * original values. */
+ * original values. This is also the 'c' command. */
 void
 stack_destroy(struct stack *s)
 {
@@ -82,7 +82,9 @@ stack_pop(struct stack *s, double *val)
 
 /* stack_push:
  * Pushes val onto the s stack. Returns -1 if a failed allocation happens, and
- * 0 otherwise. */
+ * 0 otherwise. The return value of this function should be checked even if
+ * there's guaranteed space for pushing a value, for example, when popping and
+ * pushing again, for consistency and safety. */
 int
 stack_push(struct stack *s, double val)
 {

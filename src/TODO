@@ -1,0 +1,6 @@
+comment:
+	- [x] main.c
+	- [x] stack.c
+	- [x] machine.c
+	- [x] cmd-op.c
+	- [ ] cmd-*
